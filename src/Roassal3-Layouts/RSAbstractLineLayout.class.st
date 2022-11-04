@@ -43,7 +43,8 @@ Class {
 		'gapSize',
 		'horizontalGap',
 		'verticalGap',
-		'alignment'
+		'alignment',
+		'angle'
 	],
 	#category : #'Roassal3-Layouts-Core'
 }
@@ -71,9 +72,23 @@ RSAbstractLineLayout >> alignment: anObject [
 	alignment := anObject
 ]
 
+{ #category : #accessing }
+RSAbstractLineLayout >> angle [
+	^ angle
+]
+
+{ #category : #accessing }
+RSAbstractLineLayout >> angle: anAngle [
+	angle := anAngle
+]
+
 { #category : #hook }
 RSAbstractLineLayout >> deltaFor: aNodeFigure [
 	^ self subclassResponsibility
+]
+{ #category : #hook }
+RSAbstractLineLayout >> defaultAngle [
+	^ 90.
 ]
 
 { #category : #hook }
