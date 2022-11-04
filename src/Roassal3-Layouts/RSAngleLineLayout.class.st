@@ -14,8 +14,7 @@ RSAngleLineLayout >> initialize [
 ]
 
 { #category : #'overrides' }
-RSAngleLineLayout >>doExecute: [
-doExecute: elements 
+RSAngleLineLayout >>doExecute:elements [
 	| pointer  |
 	pointer := self positionOriginalPointer.
 	elements do: [ :element |
