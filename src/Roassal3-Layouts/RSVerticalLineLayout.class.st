@@ -40,7 +40,7 @@ RSVerticalLineLayout >> initialize [
 
 { #category : #hook }
 RSVerticalLineLayout >> movePointer: pointer accordingToFigure: aNodeFigure [
-	^ pointer x @ (pointer y + aNodeFigure height + self verticalGap)
+	^  (pointer x  @ (pointer y + aNodeFigure height+ self verticalGap )) 
 ]
 
 { #category : #hook }

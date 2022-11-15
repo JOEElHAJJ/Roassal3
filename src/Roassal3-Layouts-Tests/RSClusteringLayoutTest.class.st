@@ -17,7 +17,9 @@ RSClusteringLayoutTest >> testBasic [
 	lb := RSLineBuilder line.
 	lb shapes: shapes.
 	lb connectFrom: [ :nb | nb // 2 ].
-	
+	c @ RSCanvasController.
+
+
 	nodes := c nodes.
 
 	RSConditionalLayout new
@@ -45,6 +47,8 @@ RSClusteringLayoutTest >> testBasic2 [
 	lb := RSLineBuilder line.
 	lb shapes: shapes.
 	lb connectFrom: [ :nb | nb // 2 ].
+	c @ RSCanvasController.
+
 
 	nodes := c nodes.
 
@@ -65,6 +69,7 @@ RSClusteringLayoutTest >> testBasic3 [
 	lb := RSLineBuilder line.
 	lb shapes: shapes.
 	lb connectFrom: [ :nb | nb // 2 ].
+	c @ RSCanvasController.
 
 	nodes := c nodes.
 

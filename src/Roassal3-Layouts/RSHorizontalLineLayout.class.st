@@ -47,8 +47,8 @@ RSHorizontalLineLayout >> initialize [
 ]
 
 { #category : #hook }
-RSHorizontalLineLayout >> movePointer: pointer accordingToFigure: element [
-	^ (pointer x + element width + self horizontalGap) @ pointer y
+RSHorizontalLineLayout >> movePointer: pointer accordingToFigure: aNodeFigure [
+	^  ((pointer x + aNodeFigure height+ self verticalGap )  @ pointer y) 
 ]
 
 { #category : #hook }

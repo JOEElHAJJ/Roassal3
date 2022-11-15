@@ -60,18 +60,16 @@ RSForceBasedLayout >> accumulate: aQuad [
 
 ]
 
-{ #category : #'adding-removing' }
+{ #category : #'adding/removing' }
 RSForceBasedLayout >> addLines: realLines [
 	| newMockLines |
-	newMockLines := realLines
-		collect: [ :e | self newMockLineFor: e ]
-		thenReject: [:e | e isNil ].
+	newMockLines := realLines collect: [ :e | self newMockLineFor: e ].
 	lines class = Array ifTrue: [ lines := OrderedCollection new ].
 	lines addAll: newMockLines.
 
 ]
 
-{ #category : #'adding-removing' }
+{ #category : #'adding/removing' }
 RSForceBasedLayout >> addNodes: realElements [
 	| newMockElements |
 	newMockElements := (realElements collect: [ :e | self newMockElementFor: e ]).
@@ -163,7 +161,7 @@ RSForceBasedLayout >> doExecute: nodeShapes [
 		ifTrue: [ self runLayoutInJob ]
 		ifFalse: [ self runLayoutSimply ].
 	alpha := 0.
-	nodes do: [ :e | translator translateTopLeftOf: e to: e position ].
+	nodes do: [ :e | translator translateTopLeftOf: e to: e position  ].
 	nodeShapes do: [ :n | n updateLinesON. n connectedLines do: #update ].
 ]
 
@@ -245,7 +243,7 @@ RSForceBasedLayout >> length: aFloat [
 
 { #category : #'accessing - model' }
 RSForceBasedLayout >> mockElementAt: realNode [
-	^ nodes detect: [ :each | each realShape == realNode ] ifNone: [ nil ]
+	^ nodes detect: [ :each | each realShape == realNode ]
 ]
 
 { #category : #'accessing - model' }
@@ -280,7 +278,6 @@ RSForceBasedLayout >> newMockLineFor: e [
 	| from to |
 	from := self mockElementAt: e from.
 	to := self mockElementAt: e to.
-	(from isNil or: [to isNil]) ifTrue: [ ^ nil ].
 	from addWeight.
 	to addWeight.
 	^ RSMockLine new
@@ -302,13 +299,13 @@ RSForceBasedLayout >> nodes: aCollection [
 	nodes := aCollection
 ]
 
-{ #category : #'adding-removing' }
+{ #category : #'adding/removing' }
 RSForceBasedLayout >> removeEdge: aRealEdge [
 
 	self mockLineAt: aRealEdge ifPresent: [ :edge | lines remove: edge ]
 ]
 
-{ #category : #'adding-removing' }
+{ #category : #'adding/removing' }
 RSForceBasedLayout >> removeNode: aRealNode [
 	| node |
 	node := self mockElementAt: aRealNode.
@@ -388,9 +385,7 @@ RSForceBasedLayout >> start [
 	"mandatory for animations"
 	initialLayout on: nodes.
 	nodes := nodes collect: [ :node | self newMockElementFor: node ].
-	lines := lines 
-		collect: [ :e | self newMockLineFor: e ]
-		thenReject: [:e | e isNil ].
+	lines := lines collect: [ :e | self newMockLineFor: e ].
 	self autoRepulse ifTrue: [ 
 		self calculateAutoRepulse.
 		 ].
@@ -458,7 +453,7 @@ RSForceBasedLayout >> stepGravityForce [
 { #category : #events }
 RSForceBasedLayout >> stepNodeRepulsion [
 	"Handle fixed nodes. Do this after all forces in a step were already applied."
-	quadtree := RSQuadTreeForce withAll: nodes.
+	quadtree := RSQuadTreeF withAll: nodes.
 	self accumulate: quadtree.
 	nodes
 		do: [ :each | 

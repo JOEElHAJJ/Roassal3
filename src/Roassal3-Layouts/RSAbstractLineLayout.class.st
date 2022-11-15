@@ -43,8 +43,7 @@ Class {
 		'gapSize',
 		'horizontalGap',
 		'verticalGap',
-		'alignment',
-		'angle'
+		'alignment'
 	],
 	#category : #'Roassal3-Layouts-Core'
 }
@@ -83,12 +82,19 @@ RSAbstractLineLayout >> angle: anAngle [
 ]
 
 { #category : #hook }
-RSAbstractLineLayout >> deltaFor: aNodeFigure [
-	^ self subclassResponsibility
-]
-{ #category : #hook }
 RSAbstractLineLayout >> defaultAngle [
 	^ 90.
+]
+
+{ #category : #accessing }
+RSAbstractLineLayout >> defaultGapSize [
+
+	^ 5.
+]
+
+{ #category : #hook }
+RSAbstractLineLayout >> deltaFor: aNodeFigure [
+	^ self subclassResponsibility
 ]
 
 { #category : #hook }
@@ -97,10 +103,10 @@ RSAbstractLineLayout >> doExecute: elements [
 	pointer := self positionOriginalPointer: elements.
 	elements do: [ :element |
 		delta := self deltaFor: element.
-		translator translateTopLeftOf: element to: pointer - delta.
+		translator translateTopLeftOf: element to: pointer - delta .
 		pointer := self 
-			movePointer: pointer
-			accordingToFigure: element.
+			movePointer: pointer 
+			accordingToFigure: element .
 		].
 ]
 
@@ -130,9 +136,10 @@ RSAbstractLineLayout >> horizontalGap: anInteger [
 
 { #category : #'initialize-release' }
 RSAbstractLineLayout >> initialize [
+
 	super initialize.
-	verticalGap := 10.
-	horizontalGap := 10.
+	self gapSize: self defaultGapSize.
+	 
 ]
 
 { #category : #hook }

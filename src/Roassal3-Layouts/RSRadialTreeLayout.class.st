@@ -183,7 +183,7 @@ RSRadialTreeLayout >> moveAllElementsToTopLeft: elements [
 	| pos min |
 	pos := elements collect: #position.
 	min := pos inject: 0 @ 0 into: [ :minimum :p | minimum min: p ].
-	elements do: [ :e | e translateBy: min negated ] 
+	elements do: [ :e | e translate: min negated ] 
 ]
 
 { #category : #algorithm }

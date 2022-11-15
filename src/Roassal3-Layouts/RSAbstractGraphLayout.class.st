@@ -10,8 +10,7 @@ Class {
 		'cachedChildren',
 		'cachedParents',
 		'cachedParentsWithHighestNestings',
-		'shouldValidateCycles',
-		'childrenSortBlock'
+		'shouldValidateCycles'
 	],
 	#category : #'Roassal3-Layouts-Core'
 }
@@ -65,16 +64,14 @@ RSAbstractGraphLayout >> cachedParentsWithHighestNestings [
 RSAbstractGraphLayout >> childrenFor: aNode [
 	^ self cachedChildren
 		at: aNode
-		ifAbsentPut: [ | nodes |
+		ifAbsentPut:
+			[| nodes |
 			nodes := OrderedCollection new.
-			self edgesDo: [:edge | 
-				(edge from == aNode and: [edge to ~= aNode]) ifTrue: [
-					(nodes includes: edge from)
-						ifFalse: [nodes add: edge to ]
-				]
-			].
-			self childrenSortBlock 
-				ifNotNil: [ :block | nodes sort: block ].
+			self edgesDo:
+					[:edge | 
+					(edge from == aNode and: [edge to ~= aNode])
+						ifTrue:
+							[(nodes includes: edge from) ifFalse: [nodes add: edge to]]].
 			nodes]
 ]
 
@@ -155,7 +152,6 @@ RSAbstractGraphLayout >> horizontalGap: anInteger [
 RSAbstractGraphLayout >> initialize [
 	super initialize.
 	self doNotValidateCycles.
-	self childrenSortBlock: self defaultChildrenSortBlock
 ]
 
 { #category : #private }
