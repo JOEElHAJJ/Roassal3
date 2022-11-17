@@ -34,11 +34,16 @@ RSAngleLineLayout >> initialize [
 
 { #category : #'overrides' }
 RSAngleLineLayout >> doExecute: elements [
-	| pointer |
-	pointer := self positionOriginalPointer.
-	elements doWithIndex: [ :element :index | 
-		translator translateTopLeftOf: element to: pointer.
-		pointer := pointer setR: index degrees: self angle 
-]
+
+	| originalCenter radius gap ang |
+	originalCenter := self positionOriginalPointer.
+	radius := 0.
+	gap := self gapSize.
+	ang := self angle degreesToRadians.
+	elements do: [ :element | 
+		| point |
+		point := ang cos @ ang sin * radius.
+		translator translateTopLeftOf: element to: originalCenter + point.
+		radius := radius + gap ]
 
 ]
